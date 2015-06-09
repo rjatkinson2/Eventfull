@@ -40,10 +40,11 @@ gulp.task('watch', function() {
   }));
 
   return watcher.on('update', function () {
+    var date = new Date();
     watcher.bundle()
       .pipe(source(path.OUT))
       .pipe(gulp.dest(path.DEST_SRC));
-      console.log('Updated');
+      console.log('Updated @ ' + date.toTimeString());
     })
     .bundle()
     .on('error', function(err) {
