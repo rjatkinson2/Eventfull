@@ -5,17 +5,11 @@ var _ = require('underscore');
 var WeekEvent = React.createClass({
   render: function () {
     return (
-      <div>
-        <h5>{ this.props.event.title }</h5>
-        <p>{ this.props.event.startTime }</p>
-        <p>{ this.props.event.endTime }</p>
-        <p>{ this.props.event.date  }</p>
-        <p>{ this.props.event.health }</p>
-        <p>{ this.props.event.addressOne }</p>
-        <p>{ this.props.event.addressTwo }</p>
-        <p>{ this.props.event.city }</p>
-        <p>{ this.props.event.state }</p>
-        <p>{ this.props.event.zip }</p>
+      <div className="event-card">
+        <h2>{ this.props.event.title }</h2>
+        <h5>{ this.props.event.startTime }</h5>
+        <p>{ this.props.event.endTime }{ this.props.event.date }{ this.props.event.health }</p>
+        <div className="health">healthy :)</div>
       </div>
     );
   }

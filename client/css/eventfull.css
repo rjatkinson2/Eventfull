@@ -7,9 +7,14 @@ body {
 }
 
 h2 {
+<<<<<<< HEAD
   font-size: 22px;
   font-weight: 800;
   font-style: italic;
+=======
+  font-size: 18px;
+  font-weight: 800;
+>>>>>>> (stash) Significant styling additions
   text-align: center;
   color: #7198C5;
 }
@@ -209,6 +214,39 @@ input[type=submit]{
   border-left: 10px solid rgba(113,152,197,0.30);
 }
 
+
+/*
+ * Canvas styles
+ */
+
+.canvas {
+  display: flex;
+  overflow-x: auto;
+  display: -webkit-flex;
+  webkit-flex-direction: row;
+  flex-direction: row;
+}
+
+
+/*
+ * Card styles
+ */
+
+.card{
+  background: #F1F3F9;
+  border: 1px solid #DADADA;
+  border-radius: 5px;
+  padding: 20px 10px;
+  max-width: 240px;
+  min-width: 240px;
+  max-height: 800px;
+  overflow-y: auto;
+  display: block;
+  clear: none;
+  float: left;
+  margin: 20px;
+}
+
 /*
  * Employee card styles
  */
@@ -216,11 +254,12 @@ input[type=submit]{
 .employee{
   background: #FFFFFF;
   border: 1px solid #DADADA;
-  border-radius: 3px;
+  border-radius: 5px;
   margin: 5px auto;
 }
 
 /*
+<<<<<<< HEAD
  * Action-bar and schedule view push styling
  */
 
@@ -262,3 +301,27 @@ input[type=submit]{
   -moz-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
+=======
+ * Event card styles
+ */
+
+.event-card {
+  background: #FFFFFF;
+  border: 1px solid #DADADA;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.health {
+  width: 100%;
+  padding: 2px;
+  height: 25px;
+  color: #FFF;
+  font-weight: 800;
+  text-align: center;
+  vertical-align: center;
+  background-color: #A8E5A7;
+  margin-bottom: 15px;
+}
+
+>>>>>>> (stash) Significant styling additions
