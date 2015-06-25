@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
 var React = require('react');
-var MonthWeekBoard = require('./month-week-board');
+var MonthWeekBoard = require('./month-week-bin');
 var _  = require('underscore');
 
-var MonthEventsContainer = React.createClass({
-  render:function () {
-    var monthWeeks = _.map(this.props.monthWeeks, function(weekData, key) {
+var MonthBoard = React.createClass({
+  render: function () {
+    var monthWeeks = _.map(this.props.monthWeeks, function (weekData, key) {
       return <MonthWeekBoard key={ key } weekData={ weekData } />;
     });
 
@@ -18,4 +18,4 @@ var MonthEventsContainer = React.createClass({
   }
 });
 
-module.exports = MonthEventsContainer;
+module.exports = MonthBoard;
