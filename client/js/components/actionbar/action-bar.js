@@ -4,7 +4,7 @@ var AddEvent = require('./add-event');
 var ActionBar = React.createClass({
   render: function () {
     return (
-      <div className="action-bar-default" id="action-bar">
+      <div>
         <AddEvent></AddEvent>
       </div>
     );

@@ -10,26 +10,61 @@ var Day = require('./components/day/day.js');
 var Week = require('./components/week/week.js');
 var Actionbar = require('./components/actionbar/action-bar.js');
 var Sidebar = require('./components/sidebar/sidebar.js');
+var classNames = require('classNames');
 
 var Locations = Router.Locations;
 var Location = Router.Location;
 var NotFound = Router.NotFound;
 
+var ActionBarView = React.createClass({
+  getInitialState: function () {
+    return {
+      actionBarIsOpen: false
+    };
+  },
+  toggleActionBar: function () {
+    var currentRouteName = this.context;
+    console.log(currentRouteName);
+    this.setState({actionBarIsOpen: !this.state.actionBarIsOpen});
+  },
+  render: function () {
+    var classes = classNames({
+      'action-bar-default': true,
+      'action-bar-open': this.state.actionBarIsOpen
+    });
+    console.log(classes);
+    return (
+      <Locations className={classes} id="action-bar" onNavigation={this.toggleActionBar}>
+        <Location path='*/actionbar'  handler={Actionbar} />
+        <NotFound                     handler={Actionbar} />
+      </Locations>
+    );
+  }
+});
+
+var ScheduleView = React.createClass({
+  render: function () {
+    return (
+      <Locations className="col-sm-9 col-sm-offset-3 col-md-8 col-md-offset-2 schedule-default schedule-push-right main" id="schedule">
+        <Location path='/'            handler={Week}  />
+        <Location path='/day'         handler={Day}  />
+        <Location path='/week'        handler={Week}  />
+        <Location path='/week/:date'  handler={Week}  />
+        <Location path='/month'       handler={Month} />
+        <NotFound                     handler={Week} />
+      </Locations>
+    );
+  }
+});
+
 var App = React.createClass({
   render: function () {
     return (
-      <Template>
+      <div>
         <Sidebar />
-        <Actionbar />
-        <Locations className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 schedule-default main" id="schedule">
-          <Location path='/'      handler={Week}  />
-          <Location path='/day'   handler={Day}  />
-          <Location path='/week'  handler={Week}  />
-          <Location path='/week/:date'  handler={Week}  />
-          <Location path='/month' handler={Month} />
-          <NotFound               handler={Week} />
-        </Locations>
-      </Template>
+        <ActionBarView />
+        <ScheduleView />
+      </div>
     );
   }
 });
