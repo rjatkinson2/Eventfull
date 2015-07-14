@@ -18,7 +18,7 @@ var WeekHeader = React.createClass({
     newWeek[direction](1, 'weeks');
 
     ViewActionCreators.getWeekData(newWeek);
-    this.setState({ date: newWeek })
+    this.setState({ date: newWeek });
   },
 
   render: function () {

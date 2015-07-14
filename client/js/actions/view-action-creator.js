@@ -6,11 +6,11 @@ var moment = require('moment');
 
 var ViewActionCreator = {
 
-  addEvent: function (event) {
+  addGig: function (gig) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.ViewActionTypes.ADD_EVENT
+      actionType: AppConstants.ViewActionTypes.ADD_GIG
     });
-    ApiUtils.addEvent(event, ServerActionCreator.eventAdded);
+    ApiUtils.addGig(gig, ServerActionCreator.gigAdded);
   },
 
   getDayData: function(date){
