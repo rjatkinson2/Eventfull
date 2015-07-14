@@ -27,10 +27,10 @@ var ViewActionCreator = {
       actionType: AppConstants.ViewActionTypes.GET_WEEK_DATA
     });
 
-    var startDate = moment("2015-07-04").format('YYYY-MM-DD');
-    var endDate = moment("2015-07-10").format('YYYY-MM-DD');
+    var weekStart = date.startOf('isoWeek').format('YYYY-MM-DD');
+    var weekEnd = date.endOf('isoWeek').format('YYYY-MM-DD');
 
-    ApiUtils.getWeekData(startDate, endDate, ServerActionCreator.receiveWeekData);
+    ApiUtils.getWeekData(weekStart, weekEnd, ServerActionCreator.receiveWeekData);
   },
 
   getMonthData: function (date) {
