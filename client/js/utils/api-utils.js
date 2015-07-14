@@ -5,7 +5,15 @@ var monthData = require('../monthData');
 var ApiUtils = {
 
   addGig: function (gig, callback) {
-    callback(gig);
+    var path = server + '/api/organizations/1/gigs/';
+    axios.post(path, {
+      params: {
+        gig: gig
+      }
+    }).then(function (res) {
+      console.log(res.data);
+      return res.data;
+    }).then(callback);
   },
 
   getDayData: function(date, callback){
