@@ -8,7 +8,10 @@ var AddEvent = React.createClass({
   getInitialState: function () {
     return {
       value: null,
-      dateValue: ''
+      dateValue: '',
+      calendarView: {
+        display: 'none'
+      }
     };
   },
 
@@ -27,6 +30,10 @@ var AddEvent = React.createClass({
     ViewActionCreator.addGig(gig);
   },
 
+  toggleCalendar: function () {
+    this.setState({ calendarView: { display: 'block' }});
+  },
+
   handleDateSelection: function (date, moment, e) {
     this.setState({ dateValue: date });
   },
@@ -43,8 +50,8 @@ var AddEvent = React.createClass({
           </div>
           <div className="form-group">
             <div className="col-xs-12">
-              <input type="text" placeholder="event date" ref="date" value={ this.state.dateValue }></input>
-              <DatePicker onChange={ this.handleDateSelection } />
+              <input type="text" placeholder="event date" ref="date" value={ this.state.dateValue } onClick={ this.toggleCalendar }readOnly></input>
+              <DatePicker onChange={ this.handleDateSelection } style={ this.state.calendarView } />
             </div>
           </div>
           <div className="form-group">
