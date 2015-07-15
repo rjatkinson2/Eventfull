@@ -1,12 +1,17 @@
 var React = require('react');
 var ViewActionCreator = require('../../actions/view-action-creator');
 var moment = require('moment');
+var DatePicker = require('react-date-picker');
 var _ = require('underscore');
 
 var AddEvent = React.createClass({
   getInitialState: function () {
-    return { value : null };
+    return {
+      value: null,
+      dateValue: ''
+    };
   },
+
   addGig: function (e) {
     e.preventDefault();
 
@@ -16,12 +21,16 @@ var AddEvent = React.createClass({
       }
       return _.escape(React.findDOMNode(constructor).value.trim());
     });
-    gig.date = moment().add(2,'days').format('YYYY-MM-DD');
+
     gig.locationId = '1';
     gig.attireId = '1';
-
     ViewActionCreator.addGig(gig);
   },
+
+  handleDateSelection: function (date, moment, e) {
+    this.setState({ dateValue: date });
+  },
+
   render: function () {
     return (
       <div>
@@ -34,7 +43,8 @@ var AddEvent = React.createClass({
           </div>
           <div className="form-group">
             <div className="col-xs-12">
-              <input type="text" placeholder="event date" ref="date"></input>
+              <input type="text" placeholder="event date" ref="date" value={ this.state.dateValue }></input>
+              <DatePicker onChange={ this.handleDateSelection } />
             </div>
           </div>
           <div className="form-group">
