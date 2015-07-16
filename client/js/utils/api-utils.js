@@ -11,7 +11,6 @@ var ApiUtils = {
         gig: gig
       }
     }).then(function (res) {
-      console.log(res.data);
       return res.data;
     }).then(callback);
   },
