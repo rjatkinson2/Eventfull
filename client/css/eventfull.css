@@ -72,6 +72,7 @@ input{
   display: block;
   width: 100%;
   line-height: 35px;
+  color: #7198C5;
 }
 
 input[type=submit]{

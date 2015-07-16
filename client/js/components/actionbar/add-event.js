@@ -2,6 +2,8 @@ var React = require('react');
 var ViewActionCreator = require('../../actions/view-action-creator');
 var moment = require('moment');
 var DatePicker = require('react-date-picker');
+var MaskedInput = require('react-maskedinput');
+var TimeInput = require('./time-input');
 var _ = require('underscore');
 
 var AddEvent = React.createClass({
@@ -25,8 +27,12 @@ var AddEvent = React.createClass({
       return _.escape(React.findDOMNode(constructor).value.trim());
     });
 
+    gig.startTime = moment(gig.starTime, ["h:mm A"]).format("HH:mm");
+    gig.endTime = moment(gig.endTime).format("HH:mm:ss");
+    
     gig.locationId = '1';
     gig.attireId = '1';
+
     ViewActionCreator.addGig(gig);
   },
 
@@ -36,6 +42,10 @@ var AddEvent = React.createClass({
 
   handleDateSelection: function (date, moment, e) {
     this.setState({ dateValue: date });
+  },
+
+  handleTimeClick: function (a, b, c) {
+    a.target.placeholder = "__:__ am/pm";
   },
 
   render: function () {
@@ -56,10 +66,10 @@ var AddEvent = React.createClass({
           </div>
           <div className="form-group">
             <div className="col-xs-6">
-              <input type="text" placeholder="start time" ref="startTime"></input>
+              <TimeInput placeholder="start time" ref="startTime" handleTimeClick={ this.handleTimeClick } />
             </div>
             <div className="col-xs-6">
-              <input type="text" placeholder="end time" ref="endTime"></input>
+              <TimeInput placeholder="end time" ref="endTime" handleTimeSelection={ this.handleTimeSelection } />
             </div>
           </div>
           <div className="form-group">
