@@ -13,11 +13,8 @@ var MonthWeekBin = React.createClass({
       return <MonthDayCard key = { key } dayData = { dayData } />
     });
     /*Temporary hardedcoded value to show what route will be*/
-    var weekNumber = 1;
-    var weekPath = '/week/' + weekNumber;
     return (
-      <div className="month-bin">
-        <Link href = {weekPath} >Week View</Link>
+      <div className="bin month-bin">
         { weekEvents }
       </div>
     );

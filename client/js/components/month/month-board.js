@@ -10,7 +10,7 @@ var MonthBoard = React.createClass({
     });
 
     return (
-      <div className="month-canvas">
+      <div className="col-md-8 month-canvas">
         { monthWeeks }
       </div>
     );
