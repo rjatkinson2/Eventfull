@@ -61,21 +61,35 @@ var today = moment();
 // NOTE: moments are mutable by their add/subtract methods
 var dates = [
   today.subtract(1, 'days').format('YYYY-MM-DD'),
-  today.add(1, 'days').format('YYYY-MM-DD'),
   today.add(1, 'days').format('YYYY-MM-DD')
 ];
 
-module.exports = function(Gig){
+for (var i = 0; i < 100; i++) {
+  dates.push(today.add(1, 'days').format('YYYY-MM-DD'));
+};
+
+
+function randomTime (start, end) {
+  return Math.floor(Math.random() * (end - start + 1)) + start;
+}
+
+var startTime, endTime, complexity;
+
+module.exports = function(Gig) {
   var records = [];
-  for (var i = 0; i < titles.length; i++){
+  for (var i = 0; i < 400; i++){
+    startTime = randomTime(10, 16);
+    endTime = randomTime(startTime, 24);
+    complexity = Math.floor(Math.random() * 11);
+
     records.push({
-      title: titles[i],
+      title: randomItemFromArray(titles),
       type: randomItemFromArray(types),
       date: randomItemFromArray(dates),
-      startTime: '10:00:00',
-      endTime: '24:00:00',
-      complexity: 10,
-      health: 10,
+      startTime: startTime + ':00:00',
+      endTime: endTime + ':00:00',
+      complexity: complexity,
+      health: 0,
       OrganizationId: 1,
       LocationId: Math.ceil(Math.random()*10),
       AttireId: 1,
