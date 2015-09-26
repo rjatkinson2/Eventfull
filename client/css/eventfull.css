@@ -293,6 +293,7 @@ input[type=submit]{
   padding: 0;
   min-width: 420px;
   background: none;
+  overflow: hidden;
 }
 
 .day-bin .day-bin.left {

@@ -108,12 +108,14 @@ var ApiUtils = {
 
   getFreeAgents: function (positionDetails, callback) {
     var path = server + '/api/organizations/1/employees';
+    console.log("positionDetails.date:", positionDetails.date);
+    console.log("positionDetails.date.format('YYYY-MM-DD' with UTC OMGGOGOGGO:", positionDetails.date.utcOffset(0).format('YYYY-MM-DD'));
     axios.get(path, {
       params: {
         positionId: positionDetails.positionId,
         startTime: positionDetails.startTime,
         endTime: positionDetails.endTime,
-        date: positionDetails.date.format('YYYY-MM-DD')
+        date: positionDetails.date.utcOffset(0).format('YYYY-MM-DD')
       }
     }).then(function (res) {
       return res.data;

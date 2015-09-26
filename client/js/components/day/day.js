@@ -56,7 +56,7 @@ var Day = React.createClass({
   render: function(){
     var gig, freeAgents = this.state.freeAgents;
     var gigs = _.map(this.state.gigs, function(gig, idx){
-      if(idx === '11') {
+      if(idx === '11' && freeAgents.length > 0) {
         gig = <div className='bin day-bin free-agents'>
               <div className='bin day-bin left'>
                 <GigBin
