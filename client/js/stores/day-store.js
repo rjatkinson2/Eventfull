@@ -39,6 +39,10 @@ var DayStore = assign({}, EventEmitter.prototype, {
     return _dayData.date;
   },
 
+  getFreeAgents: function () {
+    return _dayData.freeAgents;
+  },
+
   emitChange: function (){
     this.emit(CHANGE_EVENT);
   },
@@ -67,6 +71,7 @@ var DayStore = assign({}, EventEmitter.prototype, {
 
 Dispatcher.register(function(payload){
   switch (payload.actionType){
+
     case AppConstants.ServerActionTypes.DAY_DATA_RECEIVED:
       _dayData.gigs = _.indexBy(payload.gigs, function(gig){
         return gig.id;
@@ -74,17 +79,22 @@ Dispatcher.register(function(payload){
       _dayData.date = payload.date;
       DayStore.emitChange();
       break;
+
     case AppConstants.ViewActionTypes.STAFF_MOVED:
       _moveStaff(payload.info);
       DayStore.emitChange();
       break;
+
     case AppConstants.ServerActionTypes.EMAIL_UPDATE_RECEIVED:
       DayStore.emitDatabaseUpdate();
       break;
+
     case AppConstants.ServerActionTypes.FREE_AGENTS_RECEIVED:
-      DayStore.freeAgents = payload;
+      console.log("payload.freeAgents:", payload.freeAgents);
+      _dayData.freeAgents = payload.freeAgents;
       DayStore.emitChange();
       break;
+
     default:
       return true;
   }

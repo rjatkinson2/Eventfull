@@ -16,7 +16,8 @@ var Day = React.createClass({
     // pending: array full of objects representing employees
     return {
       date: '',
-      gigs: {}
+      gigs: {},
+      freeAgents: []
     };
   },
 
@@ -38,6 +39,7 @@ var Day = React.createClass({
   },
 
   _handleDayStoreUpdate: function(){
+    console.log("DayStore.getData():", DayStore.getData());
     this.setState(DayStore.getData());
   },
 
@@ -51,6 +53,7 @@ var Day = React.createClass({
 
   render: function(){
     var gigs = _.map(this.state.gigs, function(gig, idx){
+      console.log("idx:", idx);
       return (
         <div className='bin day-bin'>
           <GigBin

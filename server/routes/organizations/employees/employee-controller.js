@@ -4,6 +4,7 @@ module.exports = function(app){
 
   var models = app.get('models');
   var User = models.User;
+  var UserPositions = models.UserPositions;
 
   var employeeController = {
 
@@ -13,10 +14,13 @@ module.exports = function(app){
       var weekday = date.day() === 0 ? 7 : date.day(); //to go from 1 to 7
 
       if (req.query.positionId) {
-
-      }
-
-      if (req.query.date === undefined){
+        UserPositions.getFreeAgents(req.query).then(function (freeAgents) {
+          console.log("freeAgents:", freeAgents);
+          res.send(freeAgents);
+        }).catch(function (err) {
+          console.log("error:", error);
+        });
+      } else if (req.query.date === undefined){
         User.getAllEmployees(organizationId).then(function (employees) {
           res.send(employees);
         }).catch(function (err) {
