@@ -288,6 +288,25 @@ input[type=submit]{
   margin: 0 10px;
 }
 
+.free-agents {
+  border: none;
+  padding: 0;
+  min-width: 420px;
+  background: none;
+}
+
+.day-bin .day-bin.left {
+  margin-left: 0;
+  display: inline-block;
+}
+
+.day-bin .day-bin.right {
+  margin-right: 0;
+  display: inline-block;
+  background: none;
+  border: 1px dashed #7198C5;
+}
+
 .month-bin {
   width: 100%;
   padding: 5px;

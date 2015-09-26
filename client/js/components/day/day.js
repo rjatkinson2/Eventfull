@@ -4,6 +4,7 @@ var EmployeeStore = require('../../stores/employee-store');
 var ViewActionCreator = require('../../actions/view-action-creator');
 var DayHeader = require('./day-header');
 var GigBin = require('./gig-bin');
+var FreeAgentBin = require('./free-agent-bin');
 var StaffAvailableBin = require('./staff-available-bin');
 var _ = require('underscore');
 var moment = require('moment');
@@ -17,7 +18,8 @@ var Day = React.createClass({
     return {
       date: '',
       gigs: {},
-      freeAgents: []
+      freeAgents: [],
+      freeAgentIdx: 11
     };
   },
 
@@ -52,17 +54,31 @@ var Day = React.createClass({
   },
 
   render: function(){
+    var gig, freeAgents = this.state.freeAgents;
     var gigs = _.map(this.state.gigs, function(gig, idx){
-      console.log("idx:", idx);
-      return (
-        <div className='bin day-bin'>
-          <GigBin
-            information={gig}
-            staff={gig.Users}
-            positions={gig.Positions}
-            key={idx} />
-        </div>
-      );
+      if(idx === '11') {
+        gig = <div className='bin day-bin free-agents'>
+              <div className='bin day-bin left'>
+                <GigBin
+                  information={gig}
+                  staff={gig.Users}
+                  positions={gig.Positions}
+                  key={idx} />
+              </div>
+              <div className='bin day-bin right'>
+                <FreeAgentBin freeAgents={freeAgents}/>
+              </div>
+              </div>;
+      } else {
+        gig = <div className='bin day-bin'>
+                <GigBin
+                  information={gig}
+                  staff={gig.Users}
+                  positions={gig.Positions}
+                  key={idx} />
+              </div>;
+      }
+      return (gig);
     });
 
     return (
@@ -71,7 +87,6 @@ var Day = React.createClass({
         <div className="canvas">
           {gigs}
         </div>
-        <StaffAvailableBin />
       </div>
     );
   }
