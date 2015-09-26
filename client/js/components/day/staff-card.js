@@ -32,7 +32,8 @@ var StaffCard = React.createClass({
           positionId={position.id}
           approved={approvedList}
           needed={position.statusInfo.required}
-          gigId={props.gigId} />
+          gigId={props.gigId}
+          getFreeAgents={props.getFreeAgents} />
       );
     });
 

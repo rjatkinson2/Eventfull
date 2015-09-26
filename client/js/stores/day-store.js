@@ -81,6 +81,10 @@ Dispatcher.register(function(payload){
     case AppConstants.ServerActionTypes.EMAIL_UPDATE_RECEIVED:
       DayStore.emitDatabaseUpdate();
       break;
+    case AppConstants.ServerActionTypes.FREE_AGENTS_RECEIVED:
+      DayStore.freeAgents = payload;
+      DayStore.emitChange();
+      break;
     default:
       return true;
   }

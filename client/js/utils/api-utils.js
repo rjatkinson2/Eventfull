@@ -104,6 +104,20 @@ var ApiUtils = {
       gigId: gigInfo.id,
       organizationId: gigInfo.OrganizationId
     });
+  },
+
+  getFreeAgents: function (positionDetails, callback) {
+    var path = server + '/api/organizations/1/employees';
+    axios.get(path, {
+      params: {
+        positionId: positionDetails.positionId,
+        startTime: positionDetails.startTime,
+        endTime: positionDetails.endTime,
+        date: positionDetails.date.format('YYYY-MM-DD')
+      }
+    }).then(function (res) {
+      return res.data;
+    }).then(callback);
   }
 
 };

@@ -59,6 +59,15 @@ var ViewActionCreator = {
 
   sendConfirmationEmails: function (gigInfo) {
     ApiUtils.sendConfirmationEmails(gigInfo);
+  },
+
+  getFreeAgents: function (positionDetails) {
+    positionDetails.date = moment(positionDetails.date);
+    AppDispatcher.dispatch({
+      actionType: AppConstants.ViewActionTypes.GET_FREE_AGENTS,
+      positionDetails: positionDetails
+    });
+    ApiUtils.getFreeAgents(positionDetails, ServerActionCreator.receiveFreeAgents);
   }
 
 };

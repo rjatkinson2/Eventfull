@@ -285,6 +285,7 @@ input[type=submit]{
 .day-bin {
   max-width: 200px;
   min-width: 200px;
+  margin: 0 10px;
 }
 
 .month-bin {
@@ -327,14 +328,14 @@ input[type=submit]{
 }
 
 .employee-rating {
-  height: 2px;
+  height: 1px;
   width: 100%;
   background-color: #DADADA;
-  border: 2px solid #DADADA;
-  margin-bottom: 5px;
+  border: 1px solid #DADADA;
+  margin-bottom: 4px;
 }
 
-.employee-group > h6 {
+.employee-group > h6:not(:first-child) {
   margin-top: 25px;
 }
 

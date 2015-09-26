@@ -12,6 +12,10 @@ module.exports = function(app){
       var date = moment(req.query.date)
       var weekday = date.day() === 0 ? 7 : date.day(); //to go from 1 to 7
 
+      if (req.query.positionId) {
+
+      }
+
       if (req.query.date === undefined){
         User.getAllEmployees(organizationId).then(function (employees) {
           res.send(employees);
