@@ -5,10 +5,12 @@ var ViewActionCreator = require('../../actions/view-action-creator');
 var Sidebar = React.createClass({
   render: function () {
     return (
-      <div className="col-sm-2 sidebar">
+      <div className="col-xs-1 col-md-2 sidebar">
         <div className="logo-offset">
-          <img src="./style/EventfullLogo@2x.png" width="160px" alt="Eventfull" />
+          <img src="./style/EventfullLogo@lg.png" width="160px" alt="Eventfull" className="visible-lg-block" />
         </div>
+        <img src="./style/EventfullLogo@md.png" width="80px" alt="Eventfull" className="logo visible-md-inline-block" />
+        <img src="./style/EventfullLogo@sm.png" width="40px" alt="Eventfull" className="logo visible-sm-inline-block visible-xs-inline-block" />
         <ul className="nav nav-sidebar">
           <li className="active"><a href="#">Overview <span className="sr-only">(current)</span></a></li>
           <li><Link href='/day'>Day View</Link></li>
