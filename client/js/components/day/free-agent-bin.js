@@ -9,15 +9,12 @@ var FreeAgentBin = React.createClass({
     // and the approved employees.
   getDefaultProps: function(){
     return {
-      freeAgents: [{name:'ryanakafasdfas'}]
+      freeAgents: []
     };
   },
 
   render: function(){
-    console.log('test');
-    console.log("this.props.freeAgents:", this.props.freeAgents);
     var freeAgents = _.map(this.props.freeAgents, function(freeAgent, idx) {
-      console.log("freeAgent:", freeAgent);
       return <Employee name={freeAgent.name} rating='5' />
     });
 

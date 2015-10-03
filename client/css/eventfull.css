@@ -293,7 +293,7 @@ input[type=submit]{
   padding: 0;
   min-width: 420px;
   background: none;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .day-bin .day-bin.left {
@@ -302,6 +302,8 @@ input[type=submit]{
 }
 
 .day-bin .day-bin.right {
+  height: initial;
+  vertical-align: top;
   margin-right: 0;
   display: inline-block;
   background: none;
@@ -363,6 +365,7 @@ input[type=submit]{
   border: 1px dashed #7198C5;
   border-radius: 3px;
   margin-bottom: 5px;
+  cursor: pointer;
 }
 
 /*

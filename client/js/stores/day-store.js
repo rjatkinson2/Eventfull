@@ -89,8 +89,13 @@ Dispatcher.register(function(payload){
       DayStore.emitDatabaseUpdate();
       break;
 
+    case AppConstants.ViewActionTypes.GET_FREE_AGENTS:
+      _dayData.freeAgents = [];
+      _dayData.freeAgentIdx = payload.gigId;
+      DayStore.emitChange();
+      break;
+
     case AppConstants.ServerActionTypes.FREE_AGENTS_RECEIVED:
-      console.log("payload.freeAgents:", payload.freeAgents);
       _dayData.freeAgents = payload.freeAgents;
       DayStore.emitChange();
       break;

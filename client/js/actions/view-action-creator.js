@@ -62,12 +62,11 @@ var ViewActionCreator = {
   },
 
   getFreeAgents: function (positionDetails) {
-    console.log("positionDetails.date from creator:", positionDetails.date);
     positionDetails.date = moment(positionDetails.date);
 
     AppDispatcher.dispatch({
       actionType: AppConstants.ViewActionTypes.GET_FREE_AGENTS,
-      positionDetails: positionDetails
+      gigId: positionDetails.gigId
     });
     ApiUtils.getFreeAgents(positionDetails, ServerActionCreator.receiveFreeAgents);
   }

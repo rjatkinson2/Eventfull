@@ -16,7 +16,7 @@ var GigBin = React.createClass({
 
   _getFreeAgents: function(positionId) {
     var info = this.props.information;
-    ViewActionCreator.getFreeAgents({positionId: positionId, startTime: info.startTime, endTime: info.endTime, date: info.date});
+    ViewActionCreator.getFreeAgents({positionId: positionId, startTime: info.startTime, endTime: info.endTime, date: info.date, gigId: info.id});
   },
 
   sendConfirmationEmails: function () {

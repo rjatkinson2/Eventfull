@@ -19,7 +19,7 @@ var Day = React.createClass({
       date: '',
       gigs: {},
       freeAgents: [],
-      freeAgentIdx: 11
+      freeAgentIdx: null
     };
   },
 
@@ -41,7 +41,6 @@ var Day = React.createClass({
   },
 
   _handleDayStoreUpdate: function(){
-    console.log("DayStore.getData():", DayStore.getData());
     this.setState(DayStore.getData());
   },
 
@@ -54,9 +53,9 @@ var Day = React.createClass({
   },
 
   render: function(){
-    var gig, freeAgents = this.state.freeAgents;
+    var gig, freeAgents = this.state.freeAgents, freeAgentIdx = this.state.freeAgentIdx;
     var gigs = _.map(this.state.gigs, function(gig, idx){
-      if(idx === '11' && freeAgents.length > 0) {
+      if(freeAgentIdx && idx ===  freeAgentIdx.toString()) {
         gig = <div className='bin day-bin free-agents'>
               <div className='bin day-bin left'>
                 <GigBin
@@ -66,6 +65,7 @@ var Day = React.createClass({
                   key={idx} />
               </div>
               <div className='bin day-bin right'>
+                <h5>Free Agents</h5>
                 <FreeAgentBin freeAgents={freeAgents}/>
               </div>
               </div>;
