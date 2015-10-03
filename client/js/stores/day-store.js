@@ -93,6 +93,7 @@ Dispatcher.register(function(payload){
       _dayData.freeAgents = [];
       _dayData.freeAgentGigId = payload.gigId;
       _dayData.freeAgentPositionId = payload.positionId;
+      _dayData.freeAgentPositionName = payload.positionName;
       DayStore.emitChange();
       break;
 

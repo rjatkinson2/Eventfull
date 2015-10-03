@@ -47,7 +47,7 @@ var ViewActionCreator = {
   addFreeAgentToGig: function (info, date) {
     ApiUtils.addEmployeeToGig(info.employeeId, info.gigId, info.positionId).then(function () {
       ViewActionCreator.getDayData(date);
-      ViewActionCreator.getFreeAgents({ date: date.format('YYYY-MM-DD'), gigId: info.gigId, positionId: info.positionId });
+      ViewActionCreator.getFreeAgents({ date: date.format('YYYY-MM-DD'), gigId: info.gigId, positionId: info.positionId, positionName: info.positionName });
     });
   },
 
@@ -70,10 +70,10 @@ var ViewActionCreator = {
 
   getFreeAgents: function (positionDetails) {
     positionDetails.date = moment(positionDetails.date);
-
     AppDispatcher.dispatch({
       actionType: AppConstants.ViewActionTypes.GET_FREE_AGENTS,
       gigId: positionDetails.gigId,
+      positionName: positionDetails.positionName,
       positionId: positionDetails.positionId
     });
     ApiUtils.getFreeAgents(positionDetails, ServerActionCreator.receiveFreeAgents);
