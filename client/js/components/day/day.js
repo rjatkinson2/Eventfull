@@ -19,7 +19,8 @@ var Day = React.createClass({
       date: '',
       gigs: {},
       freeAgents: [],
-      freeAgentIdx: null
+      freeAgentGigId: null,
+      freeAgentPositionId: null
     };
   },
 
@@ -53,9 +54,9 @@ var Day = React.createClass({
   },
 
   render: function(){
-    var gig, freeAgents = this.state.freeAgents, freeAgentIdx = this.state.freeAgentIdx;
+    var gig, freeAgents = this.state.freeAgents, freeAgentGigId = this.state.freeAgentGigId, freeAgentPositionId = this.state.freeAgentPositionId;
     var gigs = _.map(this.state.gigs, function(gig, idx){
-      if(freeAgentIdx && idx ===  freeAgentIdx.toString()) {
+      if(freeAgentGigId && idx ===  freeAgentGigId.toString()) {
         gig = <div className='bin day-bin free-agents'>
               <div className='bin day-bin left'>
                 <GigBin
@@ -66,7 +67,7 @@ var Day = React.createClass({
               </div>
               <div className='bin day-bin right'>
                 <h5>Free Agents</h5>
-                <FreeAgentBin freeAgents={freeAgents}/>
+                <FreeAgentBin freeAgents={freeAgents} gigId={freeAgentGigId} positionId={freeAgentPositionId} />
               </div>
               </div>;
       } else {

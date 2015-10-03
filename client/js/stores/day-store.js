@@ -91,7 +91,8 @@ Dispatcher.register(function(payload){
 
     case AppConstants.ViewActionTypes.GET_FREE_AGENTS:
       _dayData.freeAgents = [];
-      _dayData.freeAgentIdx = payload.gigId;
+      _dayData.freeAgentGigId = payload.gigId;
+      _dayData.freeAgentPositionId = payload.positionId;
       DayStore.emitChange();
       break;
 

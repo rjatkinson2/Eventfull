@@ -7,16 +7,24 @@ var FreeAgentBin = React.createClass({
   // information: object full of gig info (like location)
   // staff: object with information about the staffing needs
     // and the approved employees.
-  getDefaultProps: function(){
+
+  getDefaultProps: function () {
     return {
       freeAgents: []
     };
   },
 
   render: function(){
-    var freeAgents = _.map(this.props.freeAgents, function(freeAgent, idx) {
-      return <Employee name={freeAgent.name} rating='5' />
-    });
+    var gigId = this.props.gigId, positionId = this.props.positionId;
+
+    var freeAgents;
+    if (this.props.freeAgents.length > 0) {
+      freeAgents = _.map(this.props.freeAgents, function(freeAgent, idx) {
+        return <Employee name={freeAgent.name} rating={freeAgent.score} employeeId={freeAgent.UserId} freeAgentBin={true} gigId={gigId} positionId={positionId} />
+      });
+    } else {
+      return <h4>Shucks, nobody else is available for this spot</h4>;
+    }
 
     return (
       <div>
