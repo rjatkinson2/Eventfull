@@ -9,7 +9,8 @@ var Employee = React.createClass({
       ViewActionCreator.addFreeAgentToGig({
         employeeId: this.props.employeeId,
         gigId: this.props.gigId,
-        positionId: this.props.positionId
+        positionId: this.props.positionId,
+        positionName: this.props.positionName
       }, DayStore.getDate());
     }
   },
