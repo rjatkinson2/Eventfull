@@ -64,7 +64,8 @@ var Day = React.createClass({
                   information={gig}
                   staff={gig.Users}
                   positions={gig.Positions}
-                  key={idx} />
+                  key={idx}
+                  freeAgentsOpen={true} />
               </div>
               <div className='bin day-bin right'>
                 <h5>Free Agents for {"'" + freeAgentPositionName + "'"}</h5>
@@ -77,7 +78,8 @@ var Day = React.createClass({
                   information={gig}
                   staff={gig.Users}
                   positions={gig.Positions}
-                  key={idx} />
+                  key={idx}
+                  freeAgentsOpen={false}/>
               </div>;
       }
       return (gig);

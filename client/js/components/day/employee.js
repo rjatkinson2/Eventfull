@@ -17,6 +17,14 @@ var Employee = React.createClass({
 
   _removeEmployeeFromGig: function () {
     ViewActionCreator.removeEmployeeFromGig(this.props.employeeId, this.props.gigId, DayStore.getDate());
+    if(this.props.freeAgentsOpen) {
+      ViewActionCreator.getFreeAgents({
+        date: DayStore.getDate().format('YYYY-MM-DD'),
+        gigId: this.props.gigId,
+        positionName: this.props.positionName,
+        positionId: this.props.positionId
+      });
+    }
   },
 
   getDefaultProps: function(){

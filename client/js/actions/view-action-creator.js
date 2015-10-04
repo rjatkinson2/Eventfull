@@ -88,7 +88,7 @@ var ViewActionCreator = {
     //   positionId: positionDetails.positionId
     // });
     ApiUtils.removeEmployeeFromGig(employeeId, gigId, date)
-      .then(ViewActionCreator.getDayData.bind(null, date));;
+      .then(ViewActionCreator.getDayData.bind(null, date));
   }
 
 };

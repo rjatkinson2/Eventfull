@@ -32,7 +32,9 @@ var StaffGroup = React.createClass({
               gigId={props.gigId}
               employeeId={data.id}
               positionId={props.positionId}
-              group={props.name} />
+              positionName={props.positionName}
+              group={props.name}
+              freeAgentsOpen={props.freeAgentsOpen} />
     });
 
     approved = props.connectDropTarget(
