@@ -343,10 +343,26 @@ input[type=submit]{
   border-radius: 5px;
   margin: 5px auto;
   cursor: pointer;
+  position: relative;
 }
 
 .employee h4 {
   margin-bottom: 5px;
+}
+
+.employee .close {
+  position: absolute;
+  top: 7px;
+  right: 0;
+  width: 20px;
+  color: rgba(113,152,197,0);
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.employee:hover .close {
+  color: rgba(113,152,197,1);
 }
 
 .employee-rating {

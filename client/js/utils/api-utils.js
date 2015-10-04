@@ -73,9 +73,9 @@ var ApiUtils = {
     });
   },
 
-  removeEmployeeFromGig: function(employeeId, gig){
+  removeEmployeeFromGig: function(employeeId, gigId){
     var gigsPath = server + '/api/organizations/1/gigs';
-    var pathDelete = gigsPath + '/' + gig + '/staff/' + employeeId + '/';
+    var pathDelete = gigsPath + '/' + gigId + '/staff/' + employeeId + '/';
     return axios.delete(pathDelete);
   },
 

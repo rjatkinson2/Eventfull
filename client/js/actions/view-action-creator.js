@@ -77,6 +77,18 @@ var ViewActionCreator = {
       positionId: positionDetails.positionId
     });
     ApiUtils.getFreeAgents(positionDetails, ServerActionCreator.receiveFreeAgents);
+  },
+
+  removeEmployeeFromGig: function (employeeId, gigId, date) {
+    // positionDetails.date = moment(positionDetails.date);
+    // AppDispatcher.dispatch({
+    //   actionType: AppConstants.ViewActionTypes.REMOVE_EMPLOYEE_FROM_GIG,
+    //   gigId: positionDetails.gigId,
+    //   positionName: positionDetails.positionName,
+    //   positionId: positionDetails.positionId
+    // });
+    ApiUtils.removeEmployeeFromGig(employeeId, gigId, date)
+      .then(ViewActionCreator.getDayData.bind(null, date));;
   }
 
 };
