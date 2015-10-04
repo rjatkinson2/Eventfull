@@ -15,6 +15,10 @@ var Employee = React.createClass({
     }
   },
 
+  _removeEmployeeFromGig: function () {
+    ViewActionCreator.removeEmployeeFromGig(this.props.employeeId, this.props.gigId, DayStore.getDate());
+  },
+
   getDefaultProps: function(){
     // name: name of employee as string
     // rating: rating of employee as number
@@ -36,8 +40,13 @@ var Employee = React.createClass({
       backgroundColor: ratingColor,
       borderColor: ratingColor,
     };
+
+    // do not show the close button for free agents
+    var displayClose = { display: this.props.freeAgentBin ? 'none' : 'inherit' };
+
     return this.props.connectDragSource(
       <div className="employee" onClick={this._draftFreeAgent} >
+        <div className="close" style={displayClose} onClick={this._removeEmployeeFromGig}>&times;</div>
         <h4>{this.props.name}</h4>
         <div className="employee-rating" style={styles}></div>
       </div>

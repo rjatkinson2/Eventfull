@@ -90,7 +90,6 @@ Dispatcher.register(function(payload){
       break;
 
     case AppConstants.ViewActionTypes.GET_FREE_AGENTS:
-      _dayData.freeAgents = [];
       _dayData.freeAgentGigId = payload.gigId;
       _dayData.freeAgentPositionId = payload.positionId;
       _dayData.freeAgentPositionName = payload.positionName;
