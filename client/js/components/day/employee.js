@@ -2,6 +2,7 @@ var React = require('react');
 var DragSource = require('react-dnd').DragSource;
 var ViewActionCreator = require('../../actions/view-action-creator');
 var DayStore = require('../../stores/day-store');
+var classnames = require('classnames');
 
 var Employee = React.createClass({
   _draftFreeAgent: function () {
@@ -34,7 +35,9 @@ var Employee = React.createClass({
       name: '',
       rating: 10,
       gigId: Infinity,
-      employeeId: Infinity
+      employeeId: Infinity,
+      adminAccepted: false,
+      workerAccepted: false
     };
   },
 
@@ -49,11 +52,17 @@ var Employee = React.createClass({
       borderColor: ratingColor,
     };
 
+    var classes = classnames({
+      'employee': true,
+      'admin-accepted': this.props.adminAccepted,
+      'worker-accepted': this.props.workerAccepted
+    });
+
     // do not show the close button for free agents
     var displayClose = { display: this.props.freeAgentBin ? 'none' : 'inherit' };
 
     return this.props.connectDragSource(
-      <div className="employee" onClick={this._draftFreeAgent} >
+      <div className={classes} onClick={this._draftFreeAgent} >
         <div className="close" style={displayClose} onClick={this._removeEmployeeFromGig}>&times;</div>
         <h4>{this.props.name}</h4>
         <div className="employee-rating" style={styles}></div>

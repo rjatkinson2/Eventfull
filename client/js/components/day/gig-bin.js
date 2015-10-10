@@ -26,6 +26,7 @@ var GigBin = React.createClass({
   render: function(){
     return (
       <div>
+        <button onClick = {this.sendConfirmationEmails} type="submit">Send Confirmation</button>
         <StaffCard staff={this.props.staff}
           positions={this.props.positions}
           gigId={this.props.information.id}

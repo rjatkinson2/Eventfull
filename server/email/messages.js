@@ -13,10 +13,13 @@ exports.sendConfirmationMessage = function(gigInfo, userInfo, locationInfo) {
     '&gigId=' + encodeURIComponent(gigInfo.id) +
     '&userId=' + encodeURIComponent(userInfo.id);
 
+  console.log(userInfo);
+
   //Will want to change email to actual users email
   var message = {
     'html': "<h3>Event Details</h3>\
     <ul>\
+     <li>Hello " + userInfo.name + "</li>\
      <li>" + gigInfo.type + "</li>\
      <li>" + gigInfo.startTime + "</li>\
      <li>" + gigInfo.endTime + "</li>\
@@ -35,15 +38,15 @@ exports.sendConfirmationMessage = function(gigInfo, userInfo, locationInfo) {
     <a href=" + noPath + "/>No</a></p>",
 
     'subject': "Catering Event Confirmation",
-    'from_email': "hackboxinterviewteam@gmail.com",
-    'from_name': "Hackbox Team",
+    'from_email': "cvsats2@gmail.com",
+    'from_name': "Eventfull Team",
     'to': [{
-            'email': "jonewman1020@gmail.com",
+            'email': "rjatkinson2@gmail.com",
             'name': "lo",
             'type': "to"
         }],
     'headers': {
-        'Reply-To': "hackboxinterviewteam@gmail.com"
+        'Reply-To': "cvsats2@gmail.com"
     }
   };
 

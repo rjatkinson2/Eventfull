@@ -16,6 +16,7 @@ module.exports = function(app, io){
       var gig;
       var location;
       var user;
+
       Gigs.getGigInfo(gigId).then(function (gigInfo) {
         gig = gigInfo;
         return Locations.getLocationInfo(gigInfo.LocationId);
@@ -24,16 +25,24 @@ module.exports = function(app, io){
         return UserGigs.getUserGigs(gigId);
       }).then(function (userIds) {
         return models.sequelize.Promise.map(userIds, function (userId) {
-          return Users.getEmployeeEmail(userId.UserId);
+          if(!userId.adminAccepted) {
+            UserGigs.updateEmployeeStatus({ userId: userId.UserId, gigId: gigId }, { adminAccepted: true, employeeAccepted: false });
+            return Users.getEmployeeEmail(userId.UserId);
+          }
+          return null;
         });
       }).then(function (userInfos) {
-        _.each(userInfos, function (user) {
-          emailService.sendEmployeeConfirmationMessage(gig.toJSON(),
-                                                   user.toJSON(),
-                                                   location.toJSON());
-        });
+          var sent = false;
+          _.each(userInfos, function (user) {
+            if (user) {
+              emailService.sendEmployeeConfirmationMessage(gig.toJSON(), user.toJSON(), location.toJSON());
+              sent = true;
+            }
+          });
+          return sent ? res.status(200).send('All email notifications have been sent') : res.sendStatus(304);
       }).catch(function (err) {
         console.log(err);
+        res.sendStatus(400);
       });
     },
 
@@ -43,24 +52,24 @@ module.exports = function(app, io){
       var gigId = parseInt(query.gigId, 10);
       //userId has a / after it, haven't figured out why yet
       var userId = parseInt(query.userId.slice(0,-1), 10);
-      var workerAccepted = query.confirmation;
+      var workerAccepted = query.confirmation === 'Yes';
 
       console.log(workerAccepted, userId, gigId);
 
       UserGigs.updateEmployeeStatus(
         {
-          gigId:gigId,
-          userId:userId
+          gigId: gigId,
+          userId: userId
         },
         {
-          workedAccepted: workerAccepted
+          workerAccepted: workerAccepted
         }
       ).then(function (result) {
         console.log('Successfuly updated employee acceptance response!');
         io.sockets.emit('email');
         res.redirect('confirmation.html');
       }).catch(function (err) {
-        console.log('Error updating worker accepted response!');
+        console.log('Error updating worker accepted response');
         res.sendStatus(404);
       });
     }
