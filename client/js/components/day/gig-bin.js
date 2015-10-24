@@ -14,6 +14,11 @@ var GigBin = React.createClass({
     };
   },
 
+  _getFreeAgents: function(positionId, positionName) {
+    var info = this.props.information;
+    ViewActionCreator.getFreeAgents({positionName: positionName, positionId: positionId, startTime: info.startTime, endTime: info.endTime, date: info.date, gigId: info.id});
+  },
+
   sendConfirmationEmails: function () {
     ViewActionCreator.sendConfirmationEmails(this.props.information);
   },
@@ -21,9 +26,12 @@ var GigBin = React.createClass({
   render: function(){
     return (
       <div>
-        <button onClick = {this.sendConfirmationEmails} type="button">Send Confirmation Emails!</button>
+        <StaffCard staff={this.props.staff}
+          positions={this.props.positions}
+          gigId={this.props.information.id}
+          getFreeAgents={this._getFreeAgents}
+          freeAgentsOpen={this.props.freeAgentsOpen} />
         <GigInformation information={this.props.information} />
-        <StaffCard staff={this.props.staff} positions={this.props.positions} gigId={this.props.information.id}/>
       </div>
     );
   }

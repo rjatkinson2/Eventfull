@@ -42,6 +42,12 @@ var ServerActionCreator = {
     AppDispatcher.dispatch({
       actionType: AppConstants.ServerActionTypes.EMAIL_UPDATE_RECEIVED
     });
+  },
+  receiveFreeAgents: function (freeAgents) {
+    AppDispatcher.dispatch({
+      actionType: AppConstants.ServerActionTypes.FREE_AGENTS_RECEIVED,
+      freeAgents: freeAgents
+    });
   }
 };
 

@@ -311,6 +311,29 @@ input[type=submit]{
 .day-bin {
   max-width: 200px;
   min-width: 200px;
+  margin: 0 10px;
+}
+
+.free-agents {
+  border: none;
+  padding: 0;
+  min-width: 420px;
+  background: none;
+  overflow: visible;
+}
+
+.day-bin .day-bin.left {
+  margin-left: 0;
+  display: inline-block;
+}
+
+.day-bin .day-bin.right {
+  height: initial;
+  vertical-align: top;
+  margin-right: 0;
+  display: inline-block;
+  background: none;
+  border: 1px dashed #7198C5;
 }
 
 .month-bin {
@@ -346,21 +369,37 @@ input[type=submit]{
   border-radius: 5px;
   margin: 5px auto;
   cursor: pointer;
+  position: relative;
 }
 
 .employee h4 {
   margin-bottom: 5px;
 }
 
-.employee-rating {
-  height: 2px;
-  width: 100%;
-  background-color: #DADADA;
-  border: 2px solid #DADADA;
-  margin-bottom: 5px;
+.employee .close {
+  position: absolute;
+  top: 7px;
+  right: 0;
+  width: 20px;
+  color: rgba(113,152,197,0);
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 }
 
-.employee-group > h6 {
+.employee:hover .close {
+  color: rgba(113,152,197,1);
+}
+
+.employee-rating {
+  height: 1px;
+  width: 100%;
+  background-color: #DADADA;
+  border: 1px solid #DADADA;
+  margin-bottom: 4px;
+}
+
+.employee-group > h6:not(:first-child) {
   margin-top: 25px;
 }
 
@@ -368,6 +407,7 @@ input[type=submit]{
   border: 1px dashed #7198C5;
   border-radius: 3px;
   margin-bottom: 5px;
+  cursor: pointer;
 }
 
 /*

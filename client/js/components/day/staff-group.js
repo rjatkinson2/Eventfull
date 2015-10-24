@@ -32,13 +32,15 @@ var StaffGroup = React.createClass({
               gigId={props.gigId}
               employeeId={data.id}
               positionId={props.positionId}
-              group={props.name} />
+              positionName={props.positionName}
+              group={props.name}
+              freeAgentsOpen={props.freeAgentsOpen} />
     });
 
     approved = props.connectDropTarget(
       <div>
         {approved}
-        <div className="employee-open-zone">
+        <div className="employee-open-zone" onClick={ props.getFreeAgents.bind(null, props.positionId, props.name) }>
           <h6>open spots ({props.needed - approved.length})</h6>
         </div>
       </div>

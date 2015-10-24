@@ -4,13 +4,35 @@ var ViewActionCreator = require('../../actions/view-action-creator');
 var DayStore = require('../../stores/day-store');
 
 var Employee = React.createClass({
+  _draftFreeAgent: function () {
+    if(this.props.freeAgentBin) {
+      ViewActionCreator.addFreeAgentToGig({
+        employeeId: this.props.employeeId,
+        gigId: this.props.gigId,
+        positionId: this.props.positionId,
+        positionName: this.props.positionName
+      }, DayStore.getDate());
+    }
+  },
+
+  _removeEmployeeFromGig: function () {
+    ViewActionCreator.removeEmployeeFromGig(this.props.employeeId, this.props.gigId, DayStore.getDate());
+    if(this.props.freeAgentsOpen) {
+      ViewActionCreator.getFreeAgents({
+        date: DayStore.getDate().format('YYYY-MM-DD'),
+        gigId: this.props.gigId,
+        positionName: this.props.positionName,
+        positionId: this.props.positionId
+      });
+    }
+  },
 
   getDefaultProps: function(){
     // name: name of employee as string
     // rating: rating of employee as number
     return {
       name: '',
-      rating: '',
+      rating: 10,
       gigId: Infinity,
       employeeId: Infinity
     };
@@ -20,14 +42,19 @@ var Employee = React.createClass({
   render: function(){
     // ratings are from 0 - 5 based on example data structure and correlate directly with ratings array indices.
     // a rating of 0 represents no ratings or the lowest rating. a rating of 5 represents the highest rating.
-    var ratings = ["#F26350", "#F26350", "#6BCFFF", "#6BCFFF", "#6BCFFF", "#A8E5A7"];
-    var ratingColor = ratings[this.props.rating] || ratings[0];
+    var ratings = ["#F26350", "#F26350", "#F98F46", "#6BCFFF", "#6BCFFF", "#A8E5A7"];
+    var ratingColor = ratings[Math.ceil(this.props.rating / 2)] || ratings[0];
     var styles = {
       backgroundColor: ratingColor,
       borderColor: ratingColor,
     };
+
+    // do not show the close button for free agents
+    var displayClose = { display: this.props.freeAgentBin ? 'none' : 'inherit' };
+
     return this.props.connectDragSource(
-      <div className="employee">
+      <div className="employee" onClick={this._draftFreeAgent} >
+        <div className="close" style={displayClose} onClick={this._removeEmployeeFromGig}>&times;</div>
         <h4>{this.props.name}</h4>
         <div className="employee-rating" style={styles}></div>
       </div>

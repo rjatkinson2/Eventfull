@@ -61,7 +61,7 @@ var App = React.createClass({
         <Sidebar />
         <Actionbar actionbarOpen={actionbarOpen} hashRoute={hashRoute} />
         <Locations className={classes} onNavigation={this.handleHashChange} id="schedule">
-          <Location path='/'            handler={Week}  />
+          <Location path='/'            handler={Day}  />
           <Location path='/day'         handler={Day}  />
           <Location path='/day/:date'   handler={Day}  />
           <Location path='/week'        handler={Week}  />
