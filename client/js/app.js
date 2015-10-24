@@ -51,6 +51,8 @@ var App = React.createClass({
       'col-md-10': !actionbarOpen,
       'col-md-offset-2': true,
       'schedule-default': true,
+      'col-xs-11': true,
+      'col-xs-offset-1': true,
       'main': true
     });
 
