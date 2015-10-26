@@ -55,7 +55,9 @@ var Employee = React.createClass({
     var classes = classnames({
       'employee': true,
       'admin-accepted': this.props.adminAccepted,
-      'worker-accepted': this.props.workerAccepted
+      'worker-accepted': this.props.workerAccepted,
+      // ===false prevents the class from being added in null case
+      'worker-declined': this.props.workerAccepted === false
     });
 
     // do not show the close button for free agents

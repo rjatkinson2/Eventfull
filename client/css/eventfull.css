@@ -358,6 +358,10 @@ input[type=submit], button[type=submit]{
   background-color: #7198C5;
 }
 
+.employee.admin-accepted.worker-declined {
+  background-color: rgba(242,99,80,.40);
+}
+
 .employee h4 {
   margin-bottom: 5px;
 }

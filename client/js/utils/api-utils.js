@@ -68,12 +68,12 @@ var ApiUtils = {
     return axios.post(pathAdd, {
         employeeId: employeeId,
         positionId: positionId,
-        adminAccepted: false,
-        workerAccepted: false,
+        adminAccepted: null,
+        workerAccepted: null,
     });
   },
 
-  removeEmployeeFromGig: function(employeeId, gigId){
+  removeEmployeeFromGig: function(employeeId, gigId) {
     var gigsPath = server + '/api/organizations/1/gigs';
     var pathDelete = gigsPath + '/' + gigId + '/staff/' + employeeId + '/';
     return axios.delete(pathDelete);
