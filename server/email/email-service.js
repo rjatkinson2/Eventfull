@@ -10,8 +10,9 @@ var messages = require('./messages');
 
 exports.sendEmployeeConfirmationMessage = function(gigInfo, userInfo, locationInfo) {
   var async = false;
+  var message = messages.sendConfirmationMessage(gigInfo, userInfo, locationInfo);
   mandrillAPI.mandrill_client.messages.send({
-    'message':messages.sendConfirmationMessage(gigInfo, userInfo, locationInfo),
+    'message': message,
     'async': async
   }, function(result) {
        console.log('Email successfully sent!', result);

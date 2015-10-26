@@ -75,7 +75,7 @@ input{
   color: #7198C5;
 }
 
-input[type=submit]{
+input[type=submit], button[type=submit]{
   background: #7198C5;
   border: 1px solid #D9DDE7;
   border-radius: 4px;
@@ -83,6 +83,7 @@ input[type=submit]{
   font-weight: 800;
   font-style: italic;
   color: #FFFFFF;
+  width: 100%;
 }
 
 ::-webkit-input-placeholder {
@@ -364,16 +365,35 @@ input[type=submit]{
  */
 
 .employee{
-  background: #FFFFFF;
+  background-color: #FFFFFF;
   border: 1px solid #DADADA;
   border-radius: 5px;
   margin: 5px auto;
   cursor: pointer;
   position: relative;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.employee.admin-accepted {
+  background-color: rgba(113,152,197,.40);
+}
+
+.employee.admin-accepted.worker-accepted {
+  background-color: #7198C5;
+}
+
+.employee.admin-accepted.worker-declined {
+  background-color: rgba(242,99,80,.40);
 }
 
 .employee h4 {
   margin-bottom: 5px;
+}
+
+.employee.admin-accepted h4 {
+  color: #FFFFFF;
 }
 
 .employee .close {
@@ -389,6 +409,11 @@ input[type=submit]{
 
 .employee:hover .close {
   color: rgba(113,152,197,1);
+}
+
+.employee.admin-accepted .close:hover {
+  color: #FFF;
+  opacity: 1;
 }
 
 .employee-rating {

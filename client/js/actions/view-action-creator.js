@@ -65,7 +65,8 @@ var ViewActionCreator = {
   },
 
   sendConfirmationEmails: function (gigInfo) {
-    ApiUtils.sendConfirmationEmails(gigInfo);
+    console.log(gigInfo);
+    ApiUtils.sendConfirmationEmails(gigInfo, this.getDayData.bind(null, moment.utc(gigInfo.date)));
   },
 
   getFreeAgents: function (positionDetails) {

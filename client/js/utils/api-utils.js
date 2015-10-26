@@ -68,12 +68,12 @@ var ApiUtils = {
     return axios.post(pathAdd, {
         employeeId: employeeId,
         positionId: positionId,
-        adminAccepted: true,
-        workerAccepted: false,
+        adminAccepted: null,
+        workerAccepted: null,
     });
   },
 
-  removeEmployeeFromGig: function(employeeId, gigId){
+  removeEmployeeFromGig: function(employeeId, gigId) {
     var gigsPath = server + '/api/organizations/1/gigs';
     var pathDelete = gigsPath + '/' + gigId + '/staff/' + employeeId + '/';
     return axios.delete(pathDelete);
@@ -97,13 +97,16 @@ var ApiUtils = {
     }).then(callback);
   },
 
-  sendConfirmationEmails: function (gigInfo) {
+  sendConfirmationEmails: function (gigInfo, callback) {
     var path = server + '/api/email/confirmation';
 
     axios.post(path, {
       gigId: gigInfo.id,
       organizationId: gigInfo.OrganizationId
-    });
+    }).then(function (res) {
+      // short-circuits if no emails are sent (response = 304)
+      console.log("res:", res);
+    }).then(callback);
   },
 
   getFreeAgents: function (positionDetails, callback) {

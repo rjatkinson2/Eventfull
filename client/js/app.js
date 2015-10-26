@@ -67,7 +67,7 @@ var App = React.createClass({
           <Location path='/week'        handler={Week}  />
           <Location path='/week/:date'  handler={Week}  />
           <Location path='/month'       handler={Month} />
-          <NotFound                     handler={Week} />
+          <NotFound                     handler={Day} />
         </Locations>
       </Template>
     );
