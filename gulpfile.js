@@ -6,6 +6,12 @@ var watchify = require('watchify');
 var reactify = require('reactify');
 var runSequence = require('run-sequence');
 var plugins = require('gulp-load-plugins')();
+var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
+var minifycss = require('gulp-minify-css');
+var rename = require('gulp-rename');
+var concat = require('gulp-concat');
+var livereload = require('gulp-livereload');
 // for production build:
     // var streamify = require('gulp-streamify');
     // var uglify = require('gulp-uglify');
@@ -23,6 +29,7 @@ var path = {
   DEST_BUILD: 'dist/build',
   DEST_SRC: 'dist/client',
   DEST_STYLE: 'dist/client/style',
+  DEST_SASS: 'dist/client/style/sass',
   ENTRY_POINT: './client/js/App.js'
 };
 
@@ -36,6 +43,17 @@ gulp.task('replaceHTMLsrc', function () {
     .pipe(gulp.dest(path.DEST));
 });
 
+gulp.task('styles', function() {
+  console.log("compiling sass");
+  gulp.src(['./client/sass/mixins.scss', './client/sass/*.scss'])
+      .pipe(concat('eventfull-sass.scss'))
+      .pipe(sass().on('error', sass.logError))
+      .pipe(minifycss())
+      .pipe(gulp.dest('./dist/client/style'))
+      .pipe(livereload());
+  console.log("SASS compiled with livereload")
+});
+
 // Transfers CSS and Image folders over to distribution.
 // This will temporarily happen any without any processing.
 gulp.task('transferStyles', function () {
@@ -46,7 +64,8 @@ gulp.task('transferStyles', function () {
 
 // watches HTML and JS for changes, browserify and reactifys JS, and bundles it all.
 gulp.task('watch', function () {
-  gulp.watch([path.HTML, path.CSS], ['replaceHTMLsrc', 'transferStyles']);
+  livereload.listen();
+  gulp.watch([path.HTML, path.CSS, 'client/sass/**/*.scss'], ['replaceHTMLsrc', 'transferStyles', 'styles']);
 
   var watcher  = watchify(browserify({
     entries: [path.ENTRY_POINT],
@@ -61,7 +80,8 @@ gulp.task('watch', function () {
     var timeStamp = new Date();
     watcher.bundle()
       .pipe(source(path.OUT))
-      .pipe(gulp.dest(path.DEST_SRC));
+      .pipe(gulp.dest(path.DEST_SRC))
+      .pipe(livereload());
     console.log('Updated @ ' + timeStamp.toTimeString());
   })
     .bundle()
@@ -84,7 +104,7 @@ gulp.task('watchTests', function () {
   gulp.watch([path.CLIENT_JS, path.TEST_SRC], ['jest']);
 });
 
-gulp.task('default', ['replaceHTMLsrc', 'transferStyles', 'watch']);
+gulp.task('default', ['replaceHTMLsrc', 'transferStyles', 'watch', 'styles']);
 
 // Version 1.2.0 of gulp-uglify uses a breaking version of UglifyJS (2.4.19)
 // We can update this once we start needing to deal with production
