@@ -40,7 +40,7 @@ var StaffCard = React.createClass({
     });
 
     return (
-      <div>
+      <div className="staff-group">
         {staff}
       </div>
     );

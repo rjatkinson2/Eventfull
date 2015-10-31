@@ -1,0 +1,68 @@
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin button-static {
+  border: 1px solid;
+  border-radius: 4px;
+  padding: .25em .5em;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@mixin button($bg-color, $bd-color, $ft-color: #FFF ) {
+  @include transition(all 0.3s ease);
+  @include button-static;
+
+  background-color: $bg-color;
+  border-color: $bd-color;
+  color: $ft-color;
+
+  &:hover {
+    background-color: mix(black, $bg-color, 10%);
+    border-color: mix(white, $bd-color, 50%);
+  }
+
+  &:active {
+    background-color: mix(black, $bg-color, 25%);
+  }
+}
+
+.bin {
+  button, button[type=submit] {
+    @include button(#7198C5, #D9DDE7);
+  }
+
+  .bin-actions button {
+    width: 33.3333%;
+    padding: 0.1em;
+    font-size: 1.0em;
+  }
+
+  .staff-group {
+    margin-top: 1.4em;
+  }
+
+  .gig-information {
+    text-align: center;
+    font-weight: bold;
+    color: #7198C5;
+    height: 0;
+    display: none;
+
+    &.open {
+      display: block;
+      height: auto;
+    }
+  }
+}
+
+button i {
+  vertical-align: middle;
+}

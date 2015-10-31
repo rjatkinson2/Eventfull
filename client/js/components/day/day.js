@@ -59,28 +59,32 @@ var Day = React.createClass({
     var gigs = _.map(this.state.gigs, function(gig, idx){
       if(freeAgentGigId && idx ===  freeAgentGigId.toString()) {
         gig = <div className='bin day-bin free-agents'>
-              <div className='bin day-bin left'>
-                <GigBin
-                  information={gig}
-                  staff={gig.Users}
-                  positions={gig.Positions}
-                  key={idx}
-                  freeAgentsOpen={true} />
-              </div>
-              <div className='bin day-bin right'>
-                <h5>Free Agents for {"'" + freeAgentPositionName + "'"}</h5>
-                <FreeAgentBin freeAgents={freeAgents} gigId={freeAgentGigId} positionId={freeAgentPositionId} positionName={freeAgentPositionName} />
-              </div>
+                <h3>{ gig.title }</h3>
+                <div className='bin day-bin left'>
+                  <GigBin
+                    information={gig}
+                    staff={gig.Users}
+                    positions={gig.Positions}
+                    key={idx}
+                    freeAgentsOpen={true} />
+                </div>
+                <div className='bin day-bin right'>
+                  <h5>Free Agents for {"'" + freeAgentPositionName + "'"}</h5>
+                  <FreeAgentBin freeAgents={freeAgents} gigId={freeAgentGigId} positionId={freeAgentPositionId} positionName={freeAgentPositionName} />
+                </div>
               </div>;
       } else {
-        gig = <div className='bin day-bin'>
-                <GigBin
-                  information={gig}
-                  staff={gig.Users}
-                  positions={gig.Positions}
-                  key={idx}
-                  freeAgentsOpen={false}/>
-              </div>;
+        gig = <div>
+                <h3>{ gig.title }</h3>
+                <div className='bin day-bin'>
+                  <GigBin
+                    information={gig}
+                    staff={gig.Users}
+                    positions={gig.Positions}
+                    key={idx}
+                    freeAgentsOpen={false}/>
+                </div>
+              </div>
       }
       return (gig);
     });
